@@ -77,14 +77,21 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
-      { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { title: "Bibhu Bhushan Sinha — Senior Data Engineer" },
+      {
+        name: "description",
+        content:
+          "Portfolio of Bibhu Bhushan Sinha, Senior Data Engineer with 13+ years building Spark, Databricks, and cloud data platforms across banking, insurance, and IoT.",
+      },
+      { name: "author", content: "Bibhu Bhushan Sinha" },
+      { property: "og:title", content: "Bibhu Bhushan Sinha — Senior Data Engineer" },
+      {
+        property: "og:description",
+        content:
+          "13+ years engineering Spark, Databricks & cloud data pipelines across banking, insurance and IoT.",
+      },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
-      { name: "twitter:site", content: "@Lovable" },
     ],
     links: [
       {
