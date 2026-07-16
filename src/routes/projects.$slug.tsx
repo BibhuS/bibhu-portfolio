@@ -1,7 +1,7 @@
 import { createFileRoute, Link, notFound } from "@tanstack/react-router";
 import { useEffect } from "react";
 import { ArrowLeft, ArrowUpRight, Check } from "lucide-react";
-import { getProject, PROJECTS } from "@/lib/portfolio-data";
+import { getProject, PROJECTS, type Project } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/projects/$slug")({
   loader: ({ params }) => {
@@ -37,7 +37,7 @@ function FallbackMissing({ message }: { message: string }) {
 }
 
 function ProjectPage() {
-  const { project } = Route.useLoaderData();
+  const { project } = Route.useLoaderData() as { project: Project };
   useEffect(() => {
     document.documentElement.classList.add("dark");
   }, []);
