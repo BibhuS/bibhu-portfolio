@@ -12,4 +12,14 @@ export default defineConfig({
     // nitro/vite builds from this
     server: { entry: "server" },
   },
+  nitro: {
+    // GitHub Pages is static-only. This preset is ignored inside Lovable builds
+    // (which force Cloudflare), but it makes `bun run build` produce a static site
+    // when run in GitHub Actions.
+    preset: "static",
+    output: {
+      dir: ".output",
+      publicDir: ".output/public",
+    },
+  },
 });
