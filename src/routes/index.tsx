@@ -263,6 +263,8 @@ function Portfolio() {
           <div className="pointer-events-auto absolute inset-0 -z-10 opacity-70 [mask-image:radial-gradient(ellipse_at_center,black,transparent_70%)]">
             <HeroCanvas />
           </div>
+          <div className="grid items-center gap-12 md:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
+          <div>
           <div className="flex items-center gap-2 text-xs font-mono text-primary">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
             AVAILABLE · 1 MONTH NOTICE
@@ -337,6 +339,11 @@ function Portfolio() {
             >
               <Linkedin className="h-4 w-4" />
             </a>
+          </div>
+          </div>
+          <div className="hidden md:block">
+            <PipelineViz />
+          </div>
           </div>
 
           {/* Stat strip */}
