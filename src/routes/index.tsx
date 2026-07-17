@@ -14,6 +14,7 @@ import {
 import resumeAsset from "@/assets/resume.pdf.asset.json";
 import { HeroCanvas } from "@/components/hero-canvas";
 import { PipelineViz } from "@/components/pipeline-viz";
+import { OrbitAvatar } from "@/components/orbit-avatar";
 import { CommandPalette } from "@/components/command-palette";
 import { ThemeToggle } from "@/components/theme-toggle";
 import {
@@ -344,7 +345,7 @@ function Portfolio() {
           </div>
           </div>
           <div className="hidden md:block">
-            <PipelineViz />
+            <OrbitAvatar />
           </div>
           </div>
 
