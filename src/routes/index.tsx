@@ -246,6 +246,7 @@ function Portfolio() {
               <CommandIcon className="h-3.5 w-3.5" />
               <span className="font-mono">⌘K</span>
             </button>
+            <ThemeToggle />
             <a
               href={resumeAsset.url}
               target="_blank"
