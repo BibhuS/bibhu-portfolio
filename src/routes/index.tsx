@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
 import {
   ArrowUpRight,
   BookOpen,
@@ -169,10 +169,6 @@ const EXPERIENCE = [
 ];
 
 function Portfolio() {
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
-
   const [filter, setFilter] = useState<string>("All");
   const filteredProjects = useMemo(
     () =>
