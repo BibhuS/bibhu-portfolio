@@ -111,6 +111,23 @@ function RootShell({ children }: { children: ReactNode }) {
   return (
     <html lang="en">
       <head>
+        <script
+          // Set the theme class before the first paint so the UI never flashes
+          // the wrong color scheme. Falls back to the system preference when no
+          // saved preference exists.
+          dangerouslySetInnerHTML={{
+            __html: `
+              (function() {
+                try {
+                  const saved = localStorage.getItem('theme');
+                  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+                  const isDark = saved ? saved === 'dark' : prefersDark;
+                  document.documentElement.classList.toggle('dark', isDark);
+                } catch (e) {}
+              })();
+            `,
+          }}
+        />
         <HeadContent />
       </head>
       <body>
