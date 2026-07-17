@@ -169,10 +169,6 @@ const EXPERIENCE = [
 ];
 
 function Portfolio() {
-  useEffect(() => {
-    document.documentElement.classList.add("dark");
-  }, []);
-
   const [filter, setFilter] = useState<string>("All");
   const filteredProjects = useMemo(
     () =>
