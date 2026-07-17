@@ -15,6 +15,7 @@ import resumeAsset from "@/assets/resume.pdf.asset.json";
 import { HeroCanvas } from "@/components/hero-canvas";
 import { PipelineViz } from "@/components/pipeline-viz";
 import { CommandPalette } from "@/components/command-palette";
+import { ThemeToggle } from "@/components/theme-toggle";
 import {
   BLOG_POSTS,
   PROJECTS,
@@ -245,6 +246,7 @@ function Portfolio() {
               <CommandIcon className="h-3.5 w-3.5" />
               <span className="font-mono">⌘K</span>
             </button>
+            <ThemeToggle />
             <a
               href={resumeAsset.url}
               target="_blank"
