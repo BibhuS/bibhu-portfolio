@@ -101,7 +101,7 @@ export function OrbitAvatar() {
         className="pointer-events-none absolute inset-[-10%] rounded-full opacity-70 blur-3xl"
         style={{
           background:
-            "conic-gradient(from 0deg, hsl(var(--primary)/0.35), hsl(var(--accent)/0.25), transparent 55%, hsl(var(--primary)/0.35))",
+            "conic-gradient(from 0deg, color-mix(in oklab, var(--primary) 40%, transparent), color-mix(in oklab, var(--accent) 30%, transparent), transparent 55%, color-mix(in oklab, var(--primary) 40%, transparent))",
           animation: "orbit-spin 22s linear infinite, orbit-drift 14s ease-in-out infinite",
         }}
       />
