@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import resumeAsset from "@/assets/resume.pdf.asset.json";
 import { HeroCanvas } from "@/components/hero-canvas";
+import { PipelineViz } from "@/components/pipeline-viz";
 import { CommandPalette } from "@/components/command-palette";
 import {
   BLOG_POSTS,
