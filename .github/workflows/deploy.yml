@@ -61,7 +61,6 @@ jobs:
 
           const publicDir = process.env.PUBLIC_DIR;
           const basePath = process.env.BASE_PATH || "/";
-          const baseNoSlash = basePath === "/" ? "" : basePath.replace(/\/$/, "");
           const origin = "https://bibhus.github.io";
           const routes = ["/", "/blog"];
           const serverEntry = await import(path.resolve(".output/server/index.mjs"));
@@ -75,9 +74,8 @@ jobs:
           }
 
           async function render(route) {
-            const requestPath = basePath === "/" ? route : `${baseNoSlash}${route === "/" ? "" : route}`;
             const response = await handler.fetch(
-              new Request(`${origin}${requestPath}`),
+              new Request(`${origin}${route}`),
               {},
               ctx,
             );
