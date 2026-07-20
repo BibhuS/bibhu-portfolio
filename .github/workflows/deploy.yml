@@ -42,7 +42,13 @@ jobs:
       - name: Prepare Pages output
         run: |
           BASE_PATH="${GITHUB_PAGES_BASE:-/}"
+          if [ -f CNAME ]; then
+            PAGES_ORIGIN="https://$(cat CNAME | head -n 1 | tr -d '[:space:]')"
+          else
+            PAGES_ORIGIN="https://bibhus.github.io"
+          fi
           echo "Base path: $BASE_PATH"
+          echo "Pages origin: $PAGES_ORIGIN"
           # TanStack Start's production build writes browser assets here.
           PUBLIC_DIR=".output/public"
 
