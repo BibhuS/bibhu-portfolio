@@ -10,6 +10,9 @@ export const getRouter = () => {
     context: { queryClient },
     scrollRestoration: true,
     defaultPreloadStaleTime: 0,
+    // GitHub Pages project sites serve the app under /<repo-name>/; BASE_URL
+    // is injected by Vite from the GITHUB_PAGES_BASE env var in the workflow.
+    basepath: import.meta.env.BASE_URL || "/",
   });
 
   return router;
