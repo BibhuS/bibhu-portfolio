@@ -62,7 +62,7 @@ jobs:
           const publicDir = process.env.PUBLIC_DIR;
           const basePath = process.env.BASE_PATH || "/";
           const baseNoSlash = basePath === "/" ? "" : basePath.replace(/\/$/, "");
-          const origin = "https://bibhus.github.io";
+          const origin = process.env.PAGES_ORIGIN || "https://bibhus.github.io";
           const routes = ["/", "/blog"];
           const serverEntry = await import(path.resolve(".output/server/index.mjs"));
           const handler = serverEntry.default ?? serverEntry;
