@@ -551,39 +551,42 @@ function Portfolio() {
         </Reveal>
 
         {/* Blog preview */}
-        <Section id="writing" label="05" title="From the blog">
-          <div className="grid gap-5 md:grid-cols-3">
-            {BLOG_POSTS.map((p) => (
+        <Reveal delay={80}>
+          <Section id="writing" label="05" title="From the blog">
+            <div className="grid gap-5 md:grid-cols-3">
+              {BLOG_POSTS.map((p, idx) => (
+                <Reveal key={p.slug} delay={idx * 80}>
+                  <Link
+                    to="/blog/$slug"
+                    params={{ slug: p.slug }}
+                    className="group block h-full rounded-xl border border-border/60 bg-card/40 p-6 transition hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/70"
+                  >
+                    <div className="flex items-center justify-between text-xs text-muted-foreground">
+                      <span className="font-mono uppercase tracking-widest text-primary">
+                        {p.tag}
+                      </span>
+                      <span>{p.readingMinutes} min</span>
+                    </div>
+                    <h3 className="mt-3 text-lg font-semibold text-foreground group-hover:text-primary">
+                      {p.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                      {p.excerpt}
+                    </p>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+            <div className="mt-8">
               <Link
-                key={p.slug}
-                to="/blog/$slug"
-                params={{ slug: p.slug }}
-                className="group rounded-xl border border-border/60 bg-card/40 p-6 transition hover:-translate-y-0.5 hover:border-primary/40 hover:bg-card/70"
+                to="/blog"
+                className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-accent"
               >
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span className="font-mono uppercase tracking-widest text-primary">
-                    {p.tag}
-                  </span>
-                  <span>{p.readingMinutes} min</span>
-                </div>
-                <h3 className="mt-3 text-lg font-semibold text-foreground group-hover:text-primary">
-                  {p.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                  {p.excerpt}
-                </p>
+                All posts <ArrowUpRight className="h-4 w-4" />
               </Link>
-            ))}
-          </div>
-          <div className="mt-8">
-            <Link
-              to="/blog"
-              className="inline-flex items-center gap-1.5 text-sm text-primary hover:text-accent"
-            >
-              All posts <ArrowUpRight className="h-4 w-4" />
-            </Link>
-          </div>
-        </Section>
+            </div>
+          </Section>
+        </Reveal>
 
         {/* Contact */}
         <Section id="contact" label="06" title="Get in touch">
