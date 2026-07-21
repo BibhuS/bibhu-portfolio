@@ -272,15 +272,17 @@ function Portfolio() {
           </div>
           <div className="grid items-center gap-10 lg:gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,520px)]">
           <div className="order-1 min-w-0">
-          <div className="flex items-center gap-2 text-xs font-mono text-primary">
-            <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-primary" />
-            AVAILABLE
+          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5 text-xs font-medium text-emerald-400">
+            <span className="relative flex h-2 w-2">
+              <span className="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-400" />
+            </span>
+            Available for opportunities
           </div>
           <h1 className="mt-6 text-5xl font-semibold leading-[1.05] tracking-tight md:text-7xl">
-            Bibhu Bhushan
-            <br />
+            Hi, I&apos;m{" "}
             <span className="bg-gradient-to-r from-primary via-primary to-accent bg-clip-text text-transparent">
-              Sinha.
+              Bibhu Bhushan Sinha.
             </span>
           </h1>
           <RotatingRole />
