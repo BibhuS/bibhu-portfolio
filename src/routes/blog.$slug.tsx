@@ -119,6 +119,20 @@ function PostPage() {
         </h1>
         <p className="mt-4 text-lg text-muted-foreground">{post.excerpt}</p>
 
+        {(post.tags?.length ? post.tags : [post.tag]).length > 0 && (
+          <div className="mt-6 flex flex-wrap gap-1.5">
+            {(post.tags?.length ? post.tags : [post.tag]).map((t) => (
+              <Link
+                key={t}
+                to="/blog"
+                className="rounded-full border border-border/60 bg-card/40 px-2.5 py-1 font-mono text-[10px] uppercase tracking-widest text-muted-foreground transition hover:border-primary/40 hover:text-primary"
+              >
+                #{t}
+              </Link>
+            ))}
+          </div>
+        )}
+
         <article className="mt-12 border-t border-border/60 pt-8">
           {renderMarkdown(post.body)}
         </article>

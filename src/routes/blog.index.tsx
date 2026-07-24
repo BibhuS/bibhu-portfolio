@@ -1,6 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useMemo, useState } from "react";
-import { ArrowLeft, Search, X } from "lucide-react";
+import { ArrowLeft, Search, X, Tag as TagIcon } from "lucide-react";
 import { BLOG_POSTS } from "@/lib/portfolio-data";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -27,26 +27,38 @@ export const Route = createFileRoute("/blog/")({
 
 function BlogIndex() {
   const [q, setQ] = useState("");
-  const [tag, setTag] = useState<string>("All");
+  const [selected, setSelected] = useState<string[]>([]);
 
-  const tags = useMemo(() => {
-    const set = new Set<string>();
-    BLOG_POSTS.forEach((p) => set.add(p.tag));
-    return ["All", ...Array.from(set)];
+  const tagCounts = useMemo(() => {
+    const counts = new Map<string, number>();
+    BLOG_POSTS.forEach((p) => {
+      (p.tags?.length ? p.tags : [p.tag]).forEach((t) => {
+        counts.set(t, (counts.get(t) ?? 0) + 1);
+      });
+    });
+    return Array.from(counts.entries()).sort(
+      (a, b) => b[1] - a[1] || a[0].localeCompare(b[0]),
+    );
   }, []);
+
+  const toggleTag = (t: string) =>
+    setSelected((prev) =>
+      prev.includes(t) ? prev.filter((x) => x !== t) : [...prev, t],
+    );
 
   const posts = useMemo(() => {
     const needle = q.trim().toLowerCase();
     return BLOG_POSTS.filter((p) => {
-      if (tag !== "All" && p.tag !== tag) return false;
+      const postTags = p.tags?.length ? p.tags : [p.tag];
+      if (selected.length && !selected.every((t) => postTags.includes(t))) return false;
       if (!needle) return true;
       return (
         p.title.toLowerCase().includes(needle) ||
         p.excerpt.toLowerCase().includes(needle) ||
-        p.tag.toLowerCase().includes(needle)
+        postTags.some((t) => t.toLowerCase().includes(needle))
       );
     });
-  }, [q, tag]);
+  }, [q, selected]);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -72,7 +84,7 @@ function BlogIndex() {
           unglamorous engineering that keeps them boring to operate.
         </p>
 
-        <div className="mt-10 flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
+        <div className="mt-10 space-y-4">
           <div className="relative w-full md:max-w-sm">
             <Search className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
             <input
@@ -93,22 +105,45 @@ function BlogIndex() {
               </button>
             )}
           </div>
-          <div className="flex flex-wrap gap-2">
-            {tags.map((t) => (
-              <button
-                key={t}
-                type="button"
-                onClick={() => setTag(t)}
-                className={
-                  "rounded-full border px-3 py-1 text-xs transition " +
-                  (tag === t
-                    ? "border-primary bg-primary/15 text-primary"
-                    : "border-border/60 text-muted-foreground hover:border-primary/30 hover:text-foreground")
-                }
-              >
-                {t}
-              </button>
-            ))}
+          <div>
+            <div className="mb-2 flex items-center justify-between gap-2">
+              <div className="inline-flex items-center gap-1.5 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <TagIcon className="h-3 w-3" /> Filter by topic
+              </div>
+              {selected.length > 0 && (
+                <button
+                  type="button"
+                  onClick={() => setSelected([])}
+                  className="inline-flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground"
+                >
+                  <X className="h-3 w-3" /> Clear ({selected.length})
+                </button>
+              )}
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {tagCounts.map(([t, count]) => {
+                const active = selected.includes(t);
+                return (
+                  <button
+                    key={t}
+                    type="button"
+                    onClick={() => toggleTag(t)}
+                    aria-pressed={active}
+                    className={
+                      "inline-flex items-center gap-1.5 rounded-full border px-3 py-1 text-xs transition " +
+                      (active
+                        ? "border-primary bg-primary/15 text-primary"
+                        : "border-border/60 text-muted-foreground hover:border-primary/30 hover:text-foreground")
+                    }
+                  >
+                    <span>{t}</span>
+                    <span className={active ? "text-primary/70" : "text-muted-foreground/60"}>
+                      {count}
+                    </span>
+                  </button>
+                );
+              })}
+            </div>
           </div>
         </div>
 
@@ -132,6 +167,18 @@ function BlogIndex() {
                   {p.title}
                 </div>
                 <div className="mt-2 text-sm text-muted-foreground">{p.excerpt}</div>
+                {(p.tags?.length ? p.tags : [p.tag]).length > 0 && (
+                  <div className="mt-3 flex flex-wrap gap-1.5">
+                    {(p.tags?.length ? p.tags : [p.tag]).map((t) => (
+                      <span
+                        key={t}
+                        className="rounded-full border border-border/60 bg-card/40 px-2 py-0.5 font-mono text-[10px] uppercase tracking-widest text-muted-foreground"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                )}
               </div>
               <div className="text-right font-mono text-xs text-muted-foreground">
                 {p.readingMinutes} min · {p.tag}
