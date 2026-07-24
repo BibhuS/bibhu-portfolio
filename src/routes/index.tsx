@@ -33,10 +33,17 @@ import {
   PROJECT_TECH_FILTERS,
   RESUME_URL,
   SOCIAL,
+  TESTIMONIALS,
 } from "@/lib/portfolio-data";
 
 export const Route = createFileRoute("/")({
   component: Portfolio,
+  head: () => ({
+    meta: [
+      { property: "og:url", content: "https://portfolio-bibhu-data.lovable.app/" },
+    ],
+    links: [{ rel: "canonical", href: "https://portfolio-bibhu-data.lovable.app/" }],
+  }),
 });
 
 const NAV = [
