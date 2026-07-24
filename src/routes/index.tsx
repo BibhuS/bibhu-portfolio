@@ -26,6 +26,7 @@ import { GitHubStats } from "@/components/github-stats";
 import { Magnetic } from "@/components/magnetic";
 import { ContactForm } from "@/components/contact-form";
 import { AiAssistant } from "@/components/ai-assistant";
+import { ArchitecturePlayground } from "@/components/architecture-playground";
 import {
   BLOG_POSTS,
   PROJECTS,
