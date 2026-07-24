@@ -26,6 +26,7 @@ import { GitHubStats } from "@/components/github-stats";
 import { Magnetic } from "@/components/magnetic";
 import { ContactForm } from "@/components/contact-form";
 import { AiAssistant } from "@/components/ai-assistant";
+import { ArchitecturePlayground } from "@/components/architecture-playground";
 import {
   BLOG_POSTS,
   PROJECTS,
@@ -582,6 +583,16 @@ function Portfolio() {
         </Reveal>
 
         {/* Blog preview */}
+        <Reveal delay={80}>
+          <Section id="playground" title="Architecture Playground">
+            <p className="mb-6 max-w-2xl text-sm text-muted-foreground">
+              Interactive reference architectures I build in the wild. Switch
+              presets, drag nodes, and watch data flow end-to-end.
+            </p>
+            <ArchitecturePlayground />
+          </Section>
+        </Reveal>
+
         <Reveal delay={80}>
           <Section id="writing" title="From the blog">
             <div className="grid gap-5 md:grid-cols-3">
